@@ -164,51 +164,49 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 ---- Noctalia
 local ipc = "qs -c noctalia-shell ipc call "
 
--- 0. CORE
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(ipc.."launcher toggle"))
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(ipc.."launcher clipboard"))
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(ipc.."controlCenter toggle"))
-hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(ipc.."settings toggle"))
-hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(ipc.."plugin:keybind-cheatsheet toggle"))
+-- 1. CORE
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(ipc.."launcher toggle"), { description = "Launcher" })
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Quit Application" })
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(ipc.."launcher clipboard"), { description = "Clipboard" })
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(ipc.."controlCenter toggle"), { description = "Noctalia Control Center" })
+hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(ipc.."settings toggle"), { description = "Noctalia Settings" })
+hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd(ipc.."plugin:keybind-cheatsheet toggle"), { description = "Keybind Reference" })
 
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("-v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"))
-hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + F", hl.dsp.window.float({action = "toggle"}))
-hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("hyprctl switchxkblayout keychron-k8-keychron-k8-2 next"))
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("-v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"), { description = "Reload Wayland" })
+hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal), { description = "Terminal" })
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "File Manager" })
+hl.bind(mainMod .. " + F", hl.dsp.window.float({action = "toggle"}), { description = "Float Window" })
+hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("hyprctl switchxkblayout keychron-k8-keychron-k8-2 next"), { description = "Switch Keyboard Layout" })
 
--- Move focus with mainMod + arrow keys
--- 1. FOCUS MANAGEMENT
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+-- 2. FOCUS MANAGEMENT
+hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }), { description = "Switch window to the left" })
+hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }), { description = "Switch window to the right" })
+hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }), { description = "Switch window up" })
+hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }), { description = "Switch window down" })
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
--- 2. WORKSPACES
-for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+-- 3. WORKSPACES
+for i = 1, 4 do
+    local key = i -- 10 maps to key 0
+    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}), { description = "Switch to workspace ".. key})
+    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }), { description = "Move window to workspace"..key })
 end
 
-hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
-hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), { description = "Switch next workspace" })
+hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }), { description = "Switch previous workspace" })
 
-hl.bind(mainMod .. " + ALT + left",  hl.dsp.layout("swapprev"))
-hl.bind(mainMod .. " + ALT + right",  hl.dsp.layout("swapnext"))
+hl.bind(mainMod .. " + ALT + left",  hl.dsp.layout("swapnext"), { description = "Swap window to the right" })
+hl.bind(mainMod .. " + ALT + right",  hl.dsp.layout("swapprev"), { description = "Swap window to the left" })
 
 -- Media keys
 -- 3. MEDIA
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc.."volume increase"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc.."volume decrease"))
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(ipc.."volume muteOutput"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc.."volume increase"), { description = "Increase volume" })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc.."volume decrease"), { description = "Decrease volume" })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(ipc.."volume muteOutput"), { description = "Mute volume" })
 
 
 -- WINDOWS AND WORKSPACES
-
 hl.workspace_rule({workspace = "1", monitor="DP-2", persistent = true })
 hl.workspace_rule({workspace = "2", monitor="DP-2", persistent = true })
 hl.workspace_rule({workspace = "3", monitor="DP-2", persistent = true })
