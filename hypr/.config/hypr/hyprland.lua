@@ -26,6 +26,7 @@ local menu        = "rofi -show run"
 hl.on("hyprland.start", function () 
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
   hl.exec_cmd("qs -c noctalia-shell")
+  hl.exec_cmd("com.core447.StreamController")
 end)
 
 -- ENVIRONMENT VARIABLES
@@ -195,6 +196,8 @@ end
 
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }), { description = "Switch next workspace" })
 hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }), { description = "Switch previous workspace" })
+hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { description = "Move floating window" })
+hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { description = "Resize window" })
 
 hl.bind(mainMod .. " + ALT + left",  hl.dsp.layout("swapnext"), { description = "Swap window to the right" })
 hl.bind(mainMod .. " + ALT + right",  hl.dsp.layout("swapprev"), { description = "Swap window to the left" })
