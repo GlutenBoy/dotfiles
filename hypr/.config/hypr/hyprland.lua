@@ -167,17 +167,19 @@ local ipc = "qs -c noctalia-shell ipc call "
 
 -- 1. CORE
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(ipc.."launcher toggle"), { description = "Launcher" })
-hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Quit Application" })
+hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Quit application" })
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(ipc.."launcher clipboard"), { description = "Clipboard" })
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(ipc.."controlCenter toggle"), { description = "Noctalia Control Center" })
-hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(ipc.."settings toggle"), { description = "Noctalia Settings" })
-hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd(ipc.."plugin:keybind-cheatsheet toggle"), { description = "Keybind Reference" })
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(ipc.."controlCenter toggle"), { description = "Noctalia sontrol center" })
+hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(ipc.."settings toggle"), { description = "Noctalia settings" })
+hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd(ipc.."plugin:keybind-cheatsheet toggle"), { description = "Keybind reference" })
+hl.bind("Print", hl.dsp.exec_cmd(ipc.."plugin:screenshot takeScreenshot region"), { description = "Screenshot region" })
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(ipc.."sessionMenu lockAndSuspend"), { description = "Lock and suspend" })
 
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("-v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"), { description = "Reload Wayland" })
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal), { description = "Terminal" })
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "File Manager" })
-hl.bind(mainMod .. " + F", hl.dsp.window.float({action = "toggle"}), { description = "Float Window" })
-hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("hyprctl switchxkblayout keychron-k8-keychron-k8-2 next"), { description = "Switch Keyboard Layout" })
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "File manager" })
+hl.bind(mainMod .. " + F", hl.dsp.window.float({action = "toggle"}), { description = "Float window" })
+hl.bind(mainMod .. " + K", hl.dsp.exec_cmd("hyprctl switchxkblayout keychron-k8-keychron-k8-2 next"), { description = "Switch keyboard layout" })
 
 -- 2. FOCUS MANAGEMENT
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }), { description = "Switch window to the left" })
