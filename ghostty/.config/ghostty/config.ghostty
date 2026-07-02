@@ -1,2 +1,3 @@
 theme = Adventure
 shell-integration = fish
+font-family = "JetBrains Mono"

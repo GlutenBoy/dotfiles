@@ -180,7 +180,8 @@ hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd(ipc.."plugin:keybind-cheatsheet togg
 hl.bind("Print", hl.dsp.exec_cmd(ipc.."plugin:screenshot takeScreenshot region"), { description = "Screenshot region" })
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(ipc.."sessionMenu lockAndSuspend"), { description = "Lock and suspend" })
 
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("-v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"), { description = "Reload Wayland" })
+-- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("-v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"), { description = "Reload Wayland" })
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprctl reload"), { description = "Reload Wayland" })
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal), { description = "Terminal" })
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager), { description = "File manager" })
 hl.bind(mainMod .. " + F", hl.dsp.window.float({action = "toggle"}), { description = "Float window" })
@@ -195,7 +196,7 @@ hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }), { descripti
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 -- 3. WORKSPACES
-for i = 1, 4 do
+for i = 1, 7 do
     local key = i -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}), { description = "Switch to workspace ".. key})
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }), { description = "Move window to workspace"..key })
@@ -206,8 +207,8 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }), { descr
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { description = "Move floating window" })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { description = "Resize window" })
 
-hl.bind(mainMod .. " + ALT + left",  hl.dsp.layout("swapnext"), { description = "Swap window to the right" })
-hl.bind(mainMod .. " + ALT + right",  hl.dsp.layout("swapprev"), { description = "Swap window to the left" })
+hl.bind(mainMod .. " + SHIFT + left",  hl.dsp.layout("swapnext"), { description = "Swap window to the right" })
+hl.bind(mainMod .. " + SHIFT + right",  hl.dsp.layout("swapprev"), { description = "Swap window to the left" })
 
 -- Media keys
 -- 3. MEDIA
@@ -220,9 +221,11 @@ hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(ipc.."volume muteOutput"), { des
 hl.workspace_rule({workspace = "1", monitor="DP-2", persistent = true })
 hl.workspace_rule({workspace = "2", monitor="DP-2", persistent = true })
 hl.workspace_rule({workspace = "3", monitor="DP-2", persistent = true })
+hl.workspace_rule({workspace = "4", monitor="DP-2", persistent = true })
+hl.workspace_rule({workspace = "5", monitor="DP-2", persistent = true })
 
-hl.workspace_rule({workspace = "4", monitor="HDMI-A-1", persistent = true })
-hl.workspace_rule({workspace = "5", monitor="HDMI-A-1", persistent = true })
+hl.workspace_rule({workspace = "6", monitor="HDMI-A-1", persistent = true })
+hl.workspace_rule({workspace = "7", monitor="HDMI-A-1", persistent = true })
 
 local suppressMaximizeRule = hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
