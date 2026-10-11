@@ -25,7 +25,7 @@ local menu        = "rofi -show run"
 -- AUTOSTART
 hl.on("hyprland.start", function () 
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("qs -c noctalia-shell")
+  hl.exec_cmd("noctalia")
   hl.exec_cmd("com.core447.StreamController")
 end)
 
@@ -100,7 +100,7 @@ hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1} 
 
 -- Martin's Curves
 hl.curve("easeInBounce",   { type = "bezier", points = { {0.42, 0},    {0.6, 1.18}  } })
-hl.curve( "rubber", { type = "spring", mass = 1, stiffness = 70, dampening = 9 } )
+hl.curve( "rubber", { type = "spring", mass = 1, stiffness = 120, dampening = 15 } )
 
 -- Default springs
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
@@ -168,17 +168,17 @@ hl.device({
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 
 ---- Noctalia
-local ipc = "qs -c noctalia-shell ipc call "
+local ipc = "noctalia msg"
 
 -- 1. CORE
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(ipc.."launcher toggle"), { description = "Launcher" })
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"), { description = "Launcher" })
 hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Quit application" })
-hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(ipc.."launcher clipboard"), { description = "Clipboard" })
-hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(ipc.."controlCenter toggle"), { description = "Noctalia sontrol center" })
-hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd(ipc.."settings toggle"), { description = "Noctalia settings" })
+hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"), { description = "Clipboard" })
+hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), { description = "Noctalia sontrol center" })
+hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("noctalia msg settings-toggle"), { description = "Noctalia settings" })
 hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd(ipc.."plugin:keybind-cheatsheet toggle"), { description = "Keybind reference" })
 hl.bind("Print", hl.dsp.exec_cmd(ipc.."plugin:screenshot takeScreenshot region"), { description = "Screenshot region" })
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd(ipc.."sessionMenu lockAndSuspend"), { description = "Lock and suspend" })
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("noctalia msg session lock-and-suspend"), { description = "Lock and suspend" })
 
 -- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("-v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"), { description = "Reload Wayland" })
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("hyprctl reload"), { description = "Reload Wayland" })
@@ -212,9 +212,9 @@ hl.bind(mainMod .. " + SHIFT + right",  hl.dsp.layout("swapprev"), { description
 
 -- Media keys
 -- 3. MEDIA
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(ipc.."volume increase"), { description = "Increase volume" })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(ipc.."volume decrease"), { description = "Decrease volume" })
-hl.bind("XF86AudioMute",        hl.dsp.exec_cmd(ipc.."volume muteOutput"), { description = "Mute volume" })
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("noctalia msg volume-up"), { description = "Increase volume" })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("noctalia msg volume-down"), { description = "Decrease volume" })
+hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("noctalia msg volume-mute"), { description = "Mute volume" })
 
 
 -- WINDOWS AND WORKSPACES
@@ -274,3 +274,13 @@ hl.window_rule({
   move = {2702, 41},
   size = {732, 1059},
 })
+
+-- Noctalia Settings
+hl.window_rule({
+    match = { class = "dev.noctalia.Noctalia" },
+    float = true,
+    size = { 1080, 920 },
+})
+
+-- For Noctalia Color templates
+--require("noctalia").apply_theme()
