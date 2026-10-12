@@ -176,7 +176,7 @@ hl.bind(mainMod .. " + Q", hl.dsp.window.close(), { description = "Quit applicat
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"), { description = "Clipboard" })
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("noctalia msg panel-toggle control-center"), { description = "Noctalia sontrol center" })
 hl.bind(mainMod .. " + comma", hl.dsp.exec_cmd("noctalia msg settings-toggle"), { description = "Noctalia settings" })
-hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd(ipc.."plugin:keybind-cheatsheet toggle"), { description = "Keybind reference" })
+hl.bind(mainMod .. " + F1", hl.dsp.exec_cmd("noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet"), { description = "Keybind reference" })
 hl.bind("Print", hl.dsp.exec_cmd(ipc.."plugin:screenshot takeScreenshot region"), { description = "Screenshot region" })
 hl.bind(mainMod .. " + CTRL + L", hl.dsp.exec_cmd("noctalia msg session lock-and-suspend"), { description = "Lock and suspend" })
 
